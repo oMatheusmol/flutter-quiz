@@ -47,9 +47,7 @@ class _MyAppState extends State<MyApp> {
 
   void _answerQuestion() {
     setState(() {
-      if (_index < (_questions.length - 1)) {
-        _index = _index + 1;
-      }
+      _index = _index + 1;
     });
   }
 
@@ -58,10 +56,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('My first App'),
+          title: Text('Quiz App'),
           backgroundColor: Colors.pink,
         ),
-        body: Column(
+        body: _index < _questions.length ? Column(
           children: [
             Question(
               _questions[_index]['questionText'].toString(),
@@ -70,8 +68,8 @@ class _MyAppState extends State<MyApp> {
               return Answer(_answerQuestion, answer);
             }).toList()
           ],
-        ),
+        ): Center(child: Text('You did % points!'),
       ),
-    );
+    ));
   }
 }
